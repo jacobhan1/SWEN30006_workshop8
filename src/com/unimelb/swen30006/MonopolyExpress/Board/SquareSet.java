@@ -8,13 +8,17 @@
 
 package com.unimelb.swen30006.MonopolyExpress.Board;
 
+import com.unimelb.swen30006.MonopolyExpress.BestCompositeScoreStrategy;
+import com.unimelb.swen30006.MonopolyExpress.ICalculateStrategy;
+import com.unimelb.swen30006.MonopolyExpress.ScoreFactory;
 import com.unimelb.swen30006.MonopolyExpress.Dice.Die;
 
 public class SquareSet {
 	private Die[] squares;
 	private int currIndex;
 	private String groupName;
-	
+	public ScoreFactory factory = ScoreFactory.getInstance(); 
+
 	public SquareSet(String groupName, int size) {
 		squares = new Die[size];
 		this.groupName = groupName;
@@ -69,5 +73,11 @@ public class SquareSet {
 			}
 		}
 		return sum;
+	}
+
+	public int getScore() {
+		
+		factory.getStrategy(this);
+		return 0;
 	}
 }

@@ -10,7 +10,6 @@ package com.unimelb.swen30006.MonopolyExpress.Board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.unimelb.swen30006.MonopolyExpress.Dice.*;
 
 
@@ -136,6 +135,14 @@ public class BoardGame {
 	public Die getNumberDie(int index) {
 		return numberDice.get(index);
 		
+	}
+
+	public int getScore() {
+		int result = 0;
+		for (SquareSet s : groups) {
+			 result = s.getScore();
+		}
+		return result;
 	}
 
 	

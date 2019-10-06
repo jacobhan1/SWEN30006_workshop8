@@ -90,8 +90,8 @@ public class MonopolyExpress {
 			}while(!turnEnds);
 			System.out.println("Turn ends");
 			
-			
-			
+			int score = board.getScore();
+			System.out.println(score);
 			//Calculate score
 			
 			
