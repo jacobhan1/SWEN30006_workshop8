@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.unimelb.swen30006.MonopolyExpress.Board.BoardGame;
+import com.unimelb.swen30006.MonopolyExpress.Dice.*;
 
 
 
@@ -19,8 +20,9 @@ public class MonopolyExpress {
 	public static void main(String[] args) {
 		
 		BoardGame board = new BoardGame();
-		ArrayList<Player> players = new ArrayList<Player>();
 		
+		ArrayList<Player> players = new ArrayList<Player>();
+		 
 		players.add(new Player("A"));
 		players.add(new Player("B"));
 		
@@ -35,24 +37,32 @@ public class MonopolyExpress {
 			boolean turnEnds = false;
 			do {
 				//Roll the dice and show the faces
-				
+				board.rollDice();
+				System.out.println("Police Dice: " + board.getPoliceDiceName());
+				System.out.println("Number Dice: " + board.getNumberDiceName()); 
 				//Check PoliceDice and place on the board
-
+				for (Die d : board.dies) {
+					if (d instanceof DiePolice) {
+						board.placeDie(d);
+						
+					}
+				}
 				
 				System.out.println(board.show());
 				
 				if(board.isAllFilled("Police")) {
-					//do something
+					board.resetDice();
+					break;
 				}else {
 					//Ask the player to pick the number dice
 					int index = 0;
-					int remainingDice = 0;
+					int remainingDice = 7;
 					
 					do {
 						System.out.println("------ Remaining Dice ----");
 						//show dice faces
-						
-						
+						System.out.println("Police Dice: " + board.getRemainPolice());
+						System.out.println("Number Dice: " + board.getNumberDiceName());
 						System.out.print("["+currentPlayer.getName()+"]Pick a number die (1-"+remainingDice+") or -1 (no pick):");
 						index = in.nextInt();
 						
