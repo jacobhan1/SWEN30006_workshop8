@@ -6,7 +6,7 @@ public class DarkBlueStrategy implements ICalculateStrategy {
 
 	@Override
 	public int getScore(SquareSet squareSet) {
-		if (squareSet.countFilled() >= 2) {
+		if (squareSet.getGroupName() == "500" && squareSet.countFilled() >= 2) {
 			return 3500;
 		}
 		return 0;

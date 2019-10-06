@@ -7,7 +7,7 @@ public class BestCompositeScoreStrategy extends CompositeScoreStrategy implement
 	@Override
 	public int getScore(SquareSet squareSet) {
 		int result = 0;
-		for (ICalculateStrategy s : super.strategies) {
+		for (ICalculateStrategy s : strategies) {
 			int price = s.getScore(squareSet);
 			result = Math.max(result, price);
 		}

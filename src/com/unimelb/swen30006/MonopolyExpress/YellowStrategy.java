@@ -6,7 +6,7 @@ public class YellowStrategy implements ICalculateStrategy {
 
 	@Override
 	public int getScore(SquareSet squareSet) {
-		if (squareSet.countFilled() >= 3) {
+		if (squareSet.getGroupName() == "300" && squareSet.countFilled() >= 3) {
 			return 2700;
 		}
 		return 0;
