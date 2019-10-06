@@ -9,19 +9,28 @@
 package com.unimelb.swen30006.MonopolyExpress.Board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.unimelb.swen30006.MonopolyExpress.Dice.*;
 
 
 public class BoardGame {
 	private ArrayList<SquareSet> groups;
 	public ArrayList<Die> dies;
-	private ArrayList<String> policeDice = new ArrayList<>();
-	private ArrayList<String> numberDice = new ArrayList<>();
+	public HashMap<Integer, Die> numberDice = new HashMap<>();
 	public BoardGame() {
 		this.groups = new ArrayList<SquareSet>();
 		this.dies = new ArrayList<>();
+		reset();
+	}
+	
+	public void reset() {
+		if(this.groups.size() > 0) {
+			this.groups.clear();
+			this.dies.clear();
+		}
 		dies.add(new Die1());
-		dies.add(new Die1());
+		dies.add(new Die2());
 		dies.add(new Die34());
 		dies.add(new Die34());
 		dies.add(new Die5());
@@ -30,14 +39,6 @@ public class BoardGame {
 		dies.add(new DiePolice());
 		dies.add(new DiePolice());
 		dies.add(new DiePolice());
-		
-		reset();
-	}
-	
-	public void reset() {
-		if(this.groups.size() > 0) {
-			this.groups.clear();
-		}
 		groups.add(new SquareSet("Police", 3));
 		groups.add(new SquareSet("Utility", 2));
 		groups.add(new SquareSet("Railroad", 4));
@@ -54,11 +55,6 @@ public class BoardGame {
 	public void rollDice () {
 		for (Die die : dies) {
 			die.roll();
-			if (die instanceof DiePolice) {
-				policeDice.add(die.getCurrentFaceName());
-			} else {
-				numberDice.add(die.getCurrentFaceName());
-			}
 		}
 	}
 	public void placeDie(Die d) {
@@ -111,38 +107,39 @@ public class BoardGame {
 	}
 
 	public String getPoliceDiceName() {
+		
 		String result = "";
-		for (String s : policeDice) {
-			result += s + " | ";
+		for (Die d : dies) {
+			if (d instanceof DiePolice) {
+			result += d.getCurrentFaceName() + " | ";
+			}
 		}
 		return result;
 	}
 
 	public String getNumberDiceName() {
+		numberDice.clear();
+		int number = 1;
 		String result = "";
-		for (String s : numberDice) {
-			result += s + " | ";
+		for (Die d : dies) {
+			if (!(d instanceof DiePolice)) {
+				numberDice.put(number, d);
+				number++;
+			}
+		}
+		for (int i = 1; i < numberDice.size() + 1; i++) {
+			result += numberDice.get(i).getCurrentFaceName() + " | ";
 		}
 		return result;
 	}
 
-	public void resetDice() {
-		policeDice.clear();
-		numberDice.clear();
+	public Die getNumberDie(int index) {
+		return numberDice.get(index);
+		
 	}
+
 	
-	public String getRemainPolice () {
-		int size = 0;
-		for (String s : policeDice) {
-			if (s.equals("<blank>")) {
-				size++;
-			}
-		}
-		String remainPolice = "";
-		for (int i = 0; i < size; i++) {
-			remainPolice += "<blank>" + " | ";
-		}
-		return remainPolice;
-	}
+	
+	
 
 }

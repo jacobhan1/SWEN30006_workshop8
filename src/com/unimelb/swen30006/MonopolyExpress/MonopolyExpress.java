@@ -8,6 +8,7 @@
 
 package com.unimelb.swen30006.MonopolyExpress;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import com.unimelb.swen30006.MonopolyExpress.Board.BoardGame;
@@ -44,30 +45,37 @@ public class MonopolyExpress {
 				for (Die d : board.dies) {
 					if (d instanceof DiePolice) {
 						board.placeDie(d);
-						
 					}
 				}
 				
 				System.out.println(board.show());
 				
 				if(board.isAllFilled("Police")) {
-					board.resetDice();
 					break;
 				}else {
 					//Ask the player to pick the number dice
+					// remove placed police.
+					Iterator<Die> iter = board.dies.iterator();
+					while (iter.hasNext() ) {
+						if (iter.next().getCurrentFaceName().equals("Police")) {
+							iter.remove();
+						}
+					}
 					int index = 0;
-					int remainingDice = 7;
+					
 					
 					do {
 						System.out.println("------ Remaining Dice ----");
 						//show dice faces
-						System.out.println("Police Dice: " + board.getRemainPolice());
+						System.out.println("Police Dice: " + board.getPoliceDiceName());
 						System.out.println("Number Dice: " + board.getNumberDiceName());
+						int remainingDice = board.numberDice.size();
 						System.out.print("["+currentPlayer.getName()+"]Pick a number die (1-"+remainingDice+") or -1 (no pick):");
 						index = in.nextInt();
-						
-						
-						
+						if(index >= 1 && index <= remainingDice) {
+							board.placeDie(board.getNumberDie(index));
+							board.dies.remove(board.getNumberDie(index));
+						}				
 					}while(index != -1);
 					
 					
