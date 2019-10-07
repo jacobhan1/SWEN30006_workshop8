@@ -6,7 +6,7 @@ public class GreenStrategy implements ICalculateStrategy {
 
 	@Override
 	public int getScore(SquareSet squareSet) {
-		if (squareSet.getGroupName() == "400" && squareSet.countFilled() >= 3) {
+		if (squareSet.getGroupName().equals("400") && squareSet.countFilled() >= 3) {
 			return 3000;
 		}
 		return 0;

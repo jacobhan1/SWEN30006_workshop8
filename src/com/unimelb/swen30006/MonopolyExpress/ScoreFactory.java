@@ -10,7 +10,7 @@ public class ScoreFactory {
 		return factory;
 	}
 	
-	public ICalculateStrategy getStrategy(SquareSet squareSet) {
+	public BestCompositeScoreStrategy getStrategy(SquareSet squareSet) {
 		strategy = new BestCompositeScoreStrategy();
 	
 		strategy.add(new BrownStrategy());
@@ -23,7 +23,7 @@ public class ScoreFactory {
 		strategy.add(new RedStrategy());
 		strategy.add(new UtilitiesStrategy());
 		strategy.add(new YellowStrategy());
-		strategy.getScore(squareSet);
-		return null;
+		
+		return strategy;
 	}
 }

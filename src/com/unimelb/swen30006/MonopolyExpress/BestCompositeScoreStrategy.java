@@ -11,7 +11,7 @@ public class BestCompositeScoreStrategy extends CompositeScoreStrategy implement
 			int price = s.getScore(squareSet);
 			result = Math.max(result, price);
 		}
-		return 0;
+		return result;
 	}
 
 }

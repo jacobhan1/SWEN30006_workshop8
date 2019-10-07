@@ -6,7 +6,7 @@ public class UtilitiesStrategy implements ICalculateStrategy {
 
 	@Override
 	public int getScore(SquareSet squareSet) {
-		if (squareSet.getGroupName() == "Utilities" && squareSet.countFilled() >= 2) {
+		if (squareSet.getGroupName().equals("Utilities") && squareSet.countFilled() >= 2) {
 			return 800;
 		}
 		return 0;

@@ -140,7 +140,8 @@ public class BoardGame {
 	public int getScore() {
 		int result = 0;
 		for (SquareSet s : groups) {
-			 result = s.getScore();
+			 
+			 result = Math.max(result, s.getScore());
 		}
 		return result;
 	}

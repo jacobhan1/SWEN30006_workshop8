@@ -8,7 +8,8 @@
 
 package com.unimelb.swen30006.MonopolyExpress.Board;
 
-import com.unimelb.swen30006.MonopolyExpress.BestCompositeScoreStrategy;
+
+
 import com.unimelb.swen30006.MonopolyExpress.ICalculateStrategy;
 import com.unimelb.swen30006.MonopolyExpress.ScoreFactory;
 import com.unimelb.swen30006.MonopolyExpress.Dice.Die;
@@ -77,7 +78,8 @@ public class SquareSet {
 
 	public int getScore() {
 		
-		factory.getStrategy(this);
-		return 0;
+		ICalculateStrategy strategy =  factory.getStrategy(this);
+		return strategy.getScore(this);
+		
 	}
 }
